@@ -1,0 +1,50 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load dataset
+data_path = 'data/fitness_data.csv'
+df = pd.read_csv(data_path)
+
+# Display summary statistics
+summary_stats = df.describe()
+print("Summary Statistics:")
+print(summary_stats)
+
+# Enhanced Visualization 1: Steps Trend Over Time
+sns.set_theme(style="whitegrid")
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=df, x="Date", y="Steps", marker="o", color="blue", linewidth=2.5)
+plt.title("Steps Trend Over Time", fontsize=16, fontweight="bold")
+plt.xlabel("Date", fontsize=14)
+plt.ylabel("Steps", fontsize=14)
+plt.xticks(rotation=45, fontsize=12)
+plt.yticks(fontsize=12)
+plt.grid(visible=True, linestyle="--", alpha=0.6)
+plt.savefig("visuals/enhanced_steps_trend.png", bbox_inches="tight")
+plt.close()
+
+# Enhanced Visualization 2: Calories Burned Per Day
+plt.figure(figsize=(10, 6))
+sns.barplot(data=df, x="Date", y="Calories_Burned", palette="coolwarm")
+plt.title("Calories Burned Per Day", fontsize=16, fontweight="bold")
+plt.xlabel("Date", fontsize=14)
+plt.ylabel("Calories Burned", fontsize=14)
+plt.xticks(rotation=45, fontsize=12)
+plt.yticks(fontsize=12)
+plt.grid(axis="y", linestyle="--", alpha=0.6)
+plt.savefig("visuals/enhanced_calories_burned.png", bbox_inches="tight")
+plt.close()
+
+# Enhanced Visualization 3: Steps vs Calories Scatter Plot
+plt.figure(figsize=(8, 6))
+sns.scatterplot(data=df, x="Steps", y="Calories_Burned", hue="Active_Hours", palette="viridis", s=100, edgecolor="black")
+plt.title("Relationship Between Steps and Calories Burned", fontsize=16, fontweight="bold")
+plt.xlabel("Steps", fontsize=14)
+plt.ylabel("Calories Burned", fontsize=14)
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
+plt.legend(title="Active Hours", fontsize=12, title_fontsize=14)
+plt.grid(visible=True, linestyle="--", alpha=0.6)
+plt.savefig("visuals/enhanced_steps_vs_calories.png", bbox_inches="tight")
+plt.close()
